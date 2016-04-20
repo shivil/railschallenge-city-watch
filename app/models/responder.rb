@@ -21,4 +21,20 @@ class Responder < ActiveRecord::Base
     end
     result
   end
+
+  def self.police
+    where(type: 'Police')
+  end
+
+  def self.fire
+    where(type: 'Fire')
+  end
+
+  def self.medical
+    where(type: 'Medical')
+  end
+
+  def self.on_duty
+    where(on_duty: true)
+  end
 end

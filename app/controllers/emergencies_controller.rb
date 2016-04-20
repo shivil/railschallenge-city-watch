@@ -14,9 +14,14 @@ class EmergenciesController < ApplicationController
   def create
     emergency = Emergency.new(emergency_params)
     if emergency.save
+      responders = emergency.responders
       render status: 201,
              json: {
-               emergency: emergency
+               # emergency: emergency,
+               emergency: {
+                 responders: responders,
+                 full_response: [Responder.count, Emergency.count]
+               }
              }
     else
       render status: 422,
