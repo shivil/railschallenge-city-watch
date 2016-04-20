@@ -4,8 +4,13 @@ class RespondersController < ApplicationController
   before_action :set_responder, only: [:show, :update]
 
   def index
-    render status: 200,
-           json: { responders: Responder.all }
+    if params[:show]
+      render status: 200,
+             json: { capacity: Responder.show_capacity }
+    else
+      render status: 200,
+             json: { responders: Responder.all }
+    end
   end
 
   def show

@@ -12,4 +12,13 @@ class Responder < ActiveRecord::Base
              :capacity,
              :on_duty])
   end
+
+  def self.show_capacity
+    result = {}
+    Responder.all.map do |responder|
+      result[responder.type] ||= []
+      result[responder.type] << responder.capacity
+    end
+    result
+  end
 end

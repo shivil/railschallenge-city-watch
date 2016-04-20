@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   resources :responders, param: :name
-  resources :emergencies
+  resources :emergencies, param: :code
 end
