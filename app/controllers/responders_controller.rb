@@ -1,6 +1,7 @@
 class RespondersController < ApplicationController
-  before_action :validate_params, only: :create
-  before_action :set_responder
+  before_action :validate_create_params, only: :create
+  before_action :validate_update_params, only: :update
+  before_action :set_responder, only: [:show, :update]
 
   def index
     render status: 200,
@@ -32,10 +33,29 @@ class RespondersController < ApplicationController
     end
   end
 
+  def update
+    if @responder.update_attributes(responder_params)
+      render status: 200,
+             json: { responder: @responder }
+    else
+      render status: 404,
+             json: { message: 'responder not found' }
+    end
+  end
+
   private
 
-  def validate_params
+  def validate_create_params
     unpermited_params = %w(id on_duty emergency_code)
+    validate_params(unpermited_params)
+  end
+
+  def validate_update_params
+    unpermited_params = %w(id emergency_code type name capacity)
+    validate_params(unpermited_params)
+  end
+
+  def validate_params(unpermited_params)
     unpermited_params.each do |unpermited_param|
       if params[:responder].keys.include? unpermited_param
         return render status: 422,
