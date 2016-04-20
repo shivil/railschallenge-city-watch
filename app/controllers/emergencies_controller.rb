@@ -5,7 +5,10 @@ class EmergenciesController < ApplicationController
 
   def index
     render status: 200,
-           json: { emergencies: Emergency.all }
+           json: {
+             emergencies: Emergency.all,
+             full_responses: [Responder.count, Emergency.count]
+           }
   end
 
   def create
