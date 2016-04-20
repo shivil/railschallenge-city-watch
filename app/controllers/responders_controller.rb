@@ -1,9 +1,20 @@
 class RespondersController < ApplicationController
   before_action :validate_params, only: :create
+  before_action :set_responder
 
   def index
     render status: 200,
            json: { responders: Responder.all }
+  end
+
+  def show
+    if @responder
+      render status: 200,
+             json: { responder: @responder }
+    else
+      render status: 404,
+             json: { message: 'responder not found' }
+    end
   end
 
   def create
@@ -37,5 +48,9 @@ class RespondersController < ApplicationController
 
   def responder_params
     params.require(:responder).permit(:name, :type, :capacity, :on_duty)
+  end
+
+  def set_responder
+    @responder =  Responder.where(name: params[:name]).first
   end
 end

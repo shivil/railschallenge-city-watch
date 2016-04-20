@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :responders
+  resources :responders, param: :name
 end
