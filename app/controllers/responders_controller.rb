@@ -18,6 +18,21 @@ class RespondersController < ApplicationController
     end
   end
 
+  def new
+    render status: 404,
+           json: { message: 'page not found' }
+  end
+
+  def edit
+    render status: 404,
+           json: { message: 'page not found' }
+  end
+
+  def destroy
+    render status: 404,
+           json: { message: 'page not found' }
+  end
+
   def create
     responder = Responder.new(responder_params)
     if responder.save
