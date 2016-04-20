@@ -13,7 +13,7 @@
 !/log/.keep
 /tmp
 
-
+.idea/workspace.xml
 *.rbc
 capybara-*.html
 .rspec
