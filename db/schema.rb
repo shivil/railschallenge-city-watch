@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160420122527) do
     t.string   "type"
     t.string   "name"
     t.integer  "capacity"
-    t.boolean  "on_duty"
+    t.boolean  "on_duty",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
